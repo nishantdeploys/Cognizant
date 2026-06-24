@@ -15,3 +15,46 @@ Thumbs.db
 bin/
 out/
 target/
+
+# Node / JS Dependencies
+node_modules/
+jspm_packages/
+web_modules/
+
+# Production Build Directories
+build/
+dist/
+out-tsc/
+
+# Environment / Secret Configuration Files (Confidential)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+*.env
+*.pem
+*.key
+*.cert
+*.pfx
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+
+# Miscellaneous
+.eslintcache
+.stylelintcache
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+
