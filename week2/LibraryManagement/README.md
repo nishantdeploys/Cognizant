@@ -1,99 +1,85 @@
-# Exercise 1: Configuring a Basic Spring Application
+# Exercise 4: Creating and Configuring a Maven Project
 
-This project is a basic Spring-based console application demonstrating the core concept of **Dependency Injection (DI)** using Spring's XML-based Application Context configuration. It simulates a backend operation for managing a library.
+This project demonstrates the creation and configuration of a Maven project for a library management application, integrating Spring dependencies and configuring the Maven Compiler Plugin for Java 1.8 compatibility.
 
-## Project Structure
-```text
-LibraryManagement/
-├── pom.xml
-├── README.md
-└── src
-    └── main
-        ├── java
-        │   └── com
-        │       └── library
-        │           ├── Main.java
-        │           ├── repository
-        │           │   └── BookRepository.java
-        │           └── service
-        │               └── BookService.java
-        └── resources
-            └── applicationContext.xml
+## 📋 Scenario & Requirements
+
+Set up a Maven project named `LibraryManagement` and configure its build environment and dependencies:
+1. **Maven Project Setup**: Set up the Maven project named `LibraryManagement`.
+2. **Spring Dependencies**: Add the dependencies for Spring Context, Spring AOP, and Spring WebMVC in the `pom.xml` file.
+3. **Maven Compiler Plugin**: Configure the compiler plugin for Java version 1.8 in the `pom.xml` file.
+
+---
+
+## 🛠️ Maven Configuration (`pom.xml`)
+
+The project's [pom.xml](file:///c:/luffy/LPUU/Projects/Cognizant/week2/LibraryManagement/pom.xml) has been configured as follows:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.library</groupId>
+    <artifactId>LibraryManagement</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <!-- Java 1.8 Source & Target Compatibility -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Spring 5.x version used for Java 1.8 support -->
+        <spring.version>5.3.31</spring.version>
+    </properties>
+
+    <dependencies>
+        <!-- 1. Spring Context Dependency -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- 2. Spring AOP Dependency -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- 3. Spring WebMVC Dependency -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Compiler Plugin configured for Java version 1.8 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
 ```
 
 ---
 
-## Code Components
+## 🔍 Dependency Details
 
-### 1. Maven Project Configuration (`pom.xml`)
-The [pom.xml](file:///c:/luffy/LPUU/Projects/Cognizant/week2/LibraryManagement/pom.xml) configures Java 17 and defines the `spring-context` dependency, which transitively downloads Spring Core, Beans, AOP, and Expression Language packages.
-
-### 2. Spring XML Context Configuration (`applicationContext.xml`)
-Located in the resources folder [applicationContext.xml](file:///c:/luffy/LPUU/Projects/Cognizant/week2/LibraryManagement/src/main/resources/applicationContext.xml), this file:
-- Defines a bean for `BookRepository`.
-- Defines a bean for `BookService` and injects `BookRepository` using **setter injection** via the `<property>` tag:
-  ```xml
-  <bean id="bookService" class="com.library.service.BookService">
-      <property name="bookRepository" ref="bookRepository" />
-  </bean>
-  ```
-
-### 3. BookRepository (`BookRepository.java`)
-The repository layer class [BookRepository.java](file:///c:/luffy/LPUU/Projects/Cognizant/week2/LibraryManagement/src/main/java/com/library/repository/BookRepository.java) simulates operations on a database.
-```java
-public void addBook(String title) {
-    System.out.println("[BookRepository] Successfully saved book: \"" + title + "\" to the database.");
-}
-```
-
-### 4. BookService (`BookService.java`)
-The service layer class [BookService.java](file:///c:/luffy/LPUU/Projects/Cognizant/week2/LibraryManagement/src/main/java/com/library/service/BookService.java) implements business workflows and delegates actual persistence calls to the injected `BookRepository`.
-```java
-public void setBookRepository(BookRepository bookRepository) {
-    this.bookRepository = bookRepository;
-}
-```
-
-### 5. Application Runner (`Main.java`)
-The main entry point class [Main.java](file:///c:/luffy/LPUU/Projects/Cognizant/week2/LibraryManagement/src/main/java/com/library/Main.java) loads the Spring context, retrieves the service bean, and tests the configuration.
-```java
-ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-BookService bookService = (BookService) context.getBean("bookService");
-bookService.registerBook("The Great Gatsby");
-```
-
----
-
-## How to Run the Application
-
-### Option A: Running inside an IDE (IntelliJ IDEA, Eclipse, VS Code)
-1. Open the `LibraryManagement` directory as a Maven project in your IDE.
-2. The IDE will automatically download the Spring dependency.
-3. Open `src/main/java/com/library/Main.java`.
-4. Right-click and choose **Run 'Main.main()'**.
-
-### Option B: Running from Command Line (If Maven is installed and on PATH)
-Run the following commands in the directory:
-```bash
-mvn clean compile
-mvn exec:java -Dexec.mainClass="com.library.Main"
-```
-
-### Expected Output
-When run successfully, you will see the following output in the console:
-```text
-=== Initializing Spring Application Context ===
-... [Spring framework logs] ...
-=== Spring Application Context Initialized Successfully ===
-
---- Performing Book Operations ---
-[BookService] Processing registration for book: "The Great Gatsby"
-[BookRepository] Successfully saved book: "The Great Gatsby" to the database.
-[BookService] Processing registration for book: "To Kill a Mockingbird"
-[BookRepository] Successfully saved book: "To Kill a Mockingbird" to the database.
-[BookService] Processing removal for book: "The Great Gatsby"
-[BookRepository] Successfully deleted book: "The Great Gatsby" from the database.
-----------------------------------
-
-=== Spring Application Configuration Tested and Working Correctly ===
-```
+* **`spring-context`**: Provides the core container, dependency injection (DI), and application context features of Spring.
+* **`spring-aop`**: Enables Aspect-Oriented Programming support, allowing separation of cross-cutting concerns (such as logging, transaction management, and security).
+* **`spring-webmvc`**: Provides Spring's model-view-controller (MVC) architecture for building web applications.
+* **Java 1.8 Compatibility**: Set via standard Maven compiler properties and explicitly declared in the `maven-compiler-plugin` configuration.
