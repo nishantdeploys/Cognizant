@@ -14,5 +14,6 @@
         <module>week2/JUnitTest</module>
         <module>week2/LibraryManagement</module>
         <module>week2/LibraryManagement_DI</module>
+        <module>week2/EmployeeManagementSystem</module>
     </modules>
 </project>
