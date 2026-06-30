@@ -16,5 +16,6 @@
         <module>week2/LibraryManagement_DI</module>
         <module>week2/EmployeeManagementSystem</module>
         <module>week3/spring-learn</module>
+        <module>week3/spring-learn-xml</module>
     </modules>
 </project>
