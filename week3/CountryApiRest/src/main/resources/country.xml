@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Configure the Country Bean with Setter Injection -->
+    <bean id="country" class="com.cognizant.springlearn.Country">
+        <!-- Injects the value "IN" into the code property via setCode() -->
+        <property name="code" value="IN" />
+        <!-- Injects the value "India" into the name property via setName() -->
+        <property name="name" value="India" />
+    </bean>
+
+</beans>
