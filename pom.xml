@@ -18,7 +18,6 @@
         <module>week3/spring-learn</module>
         <module>week3/spring-learn-xml</module>
         <module>week3/jwt-auth-service</module>
-        <module>week4/Microservices/user-service</module>
-        <module>week4/Microservices/order-service</module>
+        <module>week4/OrderManagementSystem</module>
     </modules>
 </project>
