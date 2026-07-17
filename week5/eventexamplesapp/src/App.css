@@ -1,0 +1,90 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d9dce3;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.intro h1,
+.card h2 {
+  margin: 0 0 10px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: #0f766e;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.counter-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #0f766e;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #334155;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+
+.message,
+.result {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.converter {
+  display: grid;
+  gap: 10px;
+}
+
+.converter label {
+  font-weight: 600;
+}
+
+.converter input {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 16px;
+  }
+
+  button.secondary {
+    margin-right: 0;
+  }
+}
